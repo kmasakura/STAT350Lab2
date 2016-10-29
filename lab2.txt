@@ -17,3 +17,18 @@ X.hist(type="line")
 X.mean()
 X.var()
 
+3b)
+
+
+def atleast8strikes(x):
+    strikes = RV(Exponential(lam = 1/40)).sim(500)
+    time = 0
+    for i in range(0,7,1):
+        time += strikes[i]
+    if time <= 180:
+        return 1 
+    return 0
+
+model = Exponential(lam = 1/40)    
+X = RV(model, atleast8strikes).sim(10000)
+X.tabulate(relfreq = True)
