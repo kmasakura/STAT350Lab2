@@ -1,17 +1,19 @@
 3a)
 
-strikes = RV(Exponential(lam = 1/40)).sim(10000)
+
 def num_strikes_in_3_hours(x):
+    strikes = RV(Exponential(lam = 1/40)).sim(500)
     time = 0
     numstrikes = 0
-    for i in range(len(x)):
+    for i in range(len(strikes)):
         time += strikes[i]
         if time >= 180:
             return numstrikes
         numstrikes += 1
         
-strikesmodel = Exponential(lam = 1/40)
-X = RV(strikesmodel,num_strikes_in_3_hours)
-X.sim(1000)
-
+model = Exponential(lam = 1/40)
+X = RV(model, num_strikes_in_3_hours).sim(10000)
+X.hist(type="line")
+X.mean()
+X.var()
 
